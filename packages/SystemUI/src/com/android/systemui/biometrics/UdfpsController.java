@@ -112,6 +112,7 @@ import com.android.systemui.log.SessionTracker;
 import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.power.domain.interactor.PowerInteractor;
+import com.android.systemui.settings.brightness.domain.interactor.BrightnessMirrorShowingInteractor;
 import com.android.systemui.shade.ShadeDisplayAware;
 import com.android.systemui.shade.domain.interactor.ShadeInteractor;
 import com.android.systemui.shared.system.SysUiStatsLog;
@@ -204,6 +205,7 @@ public class UdfpsController implements DozeReceiver, Dumpable {
     @NonNull private final SelectedUserInteractor mSelectedUserInteractor;
     private final boolean mIgnoreRefreshRate;
     private final KeyguardTransitionInteractor mKeyguardTransitionInteractor;
+    @NonNull private final BrightnessMirrorShowingInteractor mBrightnessMirrorShowingInteractor;
 
     // Currently the UdfpsController supports a single UDFPS sensor. If devices have multiple
     // sensors, this, in addition to a lot of the code here, will be updated.
@@ -376,7 +378,8 @@ public class UdfpsController implements DozeReceiver, Dumpable {
                         mShadeInteractor,
                         mUdfpsOverlayInteractor,
                         mPowerInteractor,
-                        mScope
+                        mScope,
+                        mBrightnessMirrorShowingInteractor
                     )));
         }
 
@@ -788,7 +791,8 @@ public class UdfpsController implements DozeReceiver, Dumpable {
             @NonNull PowerInteractor powerInteractor,
             @Application CoroutineScope scope,
             UserActivityNotifier userActivityNotifier,
-            @NonNull AuthController authController) {
+            @NonNull AuthController authController,
+            @NonNull BrightnessMirrorShowingInteractor brightnessMirrorShowingInteractor) {
         mContext = context;
         mExecution = execution;
         mVibrator = vibrator;
@@ -825,6 +829,7 @@ public class UdfpsController implements DozeReceiver, Dumpable {
         mAlternateBouncerInteractor = alternateBouncerInteractor;
         mUdfpsOverlayInteractor = udfpsOverlayInteractor;
         mPowerInteractor = powerInteractor;
+        mBrightnessMirrorShowingInteractor = brightnessMirrorShowingInteractor;
         mScope = scope;
         mInputManager = inputManager;
         mSelectedUserInteractor = selectedUserInteractor;
