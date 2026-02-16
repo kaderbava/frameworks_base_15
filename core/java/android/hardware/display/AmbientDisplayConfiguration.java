@@ -197,7 +197,7 @@ public class AmbientDisplayConfiguration {
                 && ((mScreenOffUdfpsAvailable && Flags.screenOffUnlockUdfps())
                 && mContext.getResources().getBoolean(R.bool.config_supportScreenOffUdfps)
                 ? boolSettingDefaultOn(SCREEN_OFF_UNLOCK_UDFPS_ENABLED, user)
-                : boolSettingDefaultOff(SCREEN_OFF_UNLOCK_UDFPS_ENABLED, user);
+                : boolSettingDefaultOff(SCREEN_OFF_UNLOCK_UDFPS_ENABLED, user));
     }
 
     /** @hide */
